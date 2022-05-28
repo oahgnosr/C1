@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.c1">
 
+    <!--
+    Apps that target Android 9 (API level 28) or higher and use foreground services
+    must request the FOREGROUND_SERVICE permission.
+    If not, the system will throws a SecurityException.
+    -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,9 +20,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.C1"
         tools:targetApi="31">
+        <service
+            android:name=".service.MyForegroundService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
